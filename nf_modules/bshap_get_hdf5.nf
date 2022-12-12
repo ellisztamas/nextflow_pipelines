@@ -6,7 +6,8 @@ process BISMARK_TO_HDF5 {
     tag "$name"
     label 'bigMem'
 
-    conda = "$HOME/.conda/envs/py3_quant"
+    conda '/users/thomas.ellis/nextflow_pipelines_rp/environment.yml'
+    // conda = "$HOME/.conda/envs/py3_quant"
     // conda ( "/users/rahul.pisupati/.conda/envs/nf-core-methylseq-1.5/" )
     // conda (params.enable_conda ? "bioconda::methylpy=1.4.3" : null)
     // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?

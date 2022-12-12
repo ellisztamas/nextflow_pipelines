@@ -8,7 +8,7 @@ workflow INPUT_FILES {
     fileList
 
     main:
-    if (params.file_ext == "fastq"){
+    if (params.file_ext == "fastq" | params.file_ext == "fastq" ){
         file_ch = Channel.fromFilePairs( fileList )
     } else if (params.file_ext == "bam"){
         ch_input_bams = Channel
@@ -21,6 +21,7 @@ workflow INPUT_FILES {
                             .map{ row -> [ file(row).baseName, file(row, checkIfExists: true) ] }
         file_ch = SRAtoFastq ( ch_input_sra ).fastq_ch
     }
+    println(file_ch)
 
     emit:
     file_ch

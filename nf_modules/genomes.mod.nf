@@ -46,12 +46,14 @@ process BISMARK_GENOMEPREPARATION {
         // mode: params.publish_dir_mode,
         // saveAs: { filename -> saveFiles(filename:filename, options:params.options, publish_dir:getSoftwareName(task.process), publish_id:'') }
 
-    conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
-    if (workflow.containerEngine == 'singularity' && !params.singularity_pull_docker_container) {
-        container "https://depot.galaxyproject.org/singularity/bismark:0.23.0--0"
-    } else {
-        container "quay.io/biocontainers/bismark:0.23.0--0"
-    }
+	conda '/users/thomas.ellis/nextflow_pipelines_rp/environment.yml'
+
+    // conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
+    // if (workflow.containerEngine == 'singularity' && !params.singularity_pull_docker_container) {
+    //     container "https://depot.galaxyproject.org/singularity/bismark:0.23.0--0"
+    // } else {
+    //     container "quay.io/biocontainers/bismark:0.23.0--0"
+    // }
 
     input:
     tuple val(name), val(genome_id), path(fasta, stageAs: "BismarkIndex/*")

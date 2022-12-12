@@ -2,11 +2,12 @@ nextflow.enable.dsl=2
 params.save_intermediate = false
 
 process BISMARK2REPORT {
+	conda '/users/thomas.ellis/nextflow_pipelines_rp/environment.yml'
 
-	conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
-        'quay.io/biocontainers/bismark:0.23.0--0' }"
+	// conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
+    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    //     'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
+    //     'quay.io/biocontainers/bismark:0.23.0--0' }"
 	
     input:
 	    file (file)

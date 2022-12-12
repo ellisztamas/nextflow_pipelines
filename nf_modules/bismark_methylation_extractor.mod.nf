@@ -14,10 +14,12 @@ process BISMARK_METHYLATION_EXTRACTOR {
 	
 	tag "$name" // Adds name to job submission instead of (1), (2) etc.
 
-	conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
-        'quay.io/biocontainers/bismark:0.23.0--0' }"
+	conda '/users/thomas.ellis/nextflow_pipelines_rp/environment.yml'
+
+	// conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
+    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    //     'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
+    //     'quay.io/biocontainers/bismark:0.23.0--0' }"
 
     input:
 	    tuple val (name), path(bam), val(genome_name), path (genome)

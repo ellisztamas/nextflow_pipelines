@@ -16,11 +16,12 @@ process TRIM_GALORE {
 	tag "$name"                         // Adds name to job submission instead of (1), (2) etc.
 
 	label 'quadCore'                    // sets cpus = 4
-
-	conda (params.enable_conda ? 'bioconda::trim-galore=0.6.7' : null)
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/trim-galore:0.6.7--hdfd78af_0' :
-        'quay.io/biocontainers/trim-galore:0.6.7--hdfd78af_0' }"
+	
+	conda '/users/thomas.ellis/nextflow_pipelines_rp/environment.yml'
+	// conda (params.enable_conda ? 'bioconda::trim-galore=0.6.7' : null)
+    // container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+    //     'https://depot.galaxyproject.org/singularity/trim-galore:0.6.7--hdfd78af_0' :
+    //     'quay.io/biocontainers/trim-galore:0.6.7--hdfd78af_0' }"
 	
 	// dynamic directive
 	memory { 10.GB * task.attempt }  

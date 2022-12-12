@@ -19,10 +19,10 @@ if (params.verbose){
     println ("[WORKFLOW] TRIM GALORE ARGS: "      + params.trim_galore_args)
 }
 
-include { makeFilesChannel; getFileBaseNames } from './nf_modules/files.mod.nf'
+// include { makeFilesChannel; getFileBaseNames } from './nf_modules/files.mod.nf'
 include { TRIM_GALORE }                            from './nf_modules/trim_galore.mod.nf'
 
-file_ch = makeFilesChannel(args)
+file_ch = Channel.fromFilePairs('/scratch-cbe/users/thomas.ellis/00_temp/*_R{1,2}_*.fastq.gz')
 
 workflow {
 
